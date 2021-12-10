@@ -1,0 +1,245 @@
+--- level---
+Create table level_rank(
+     id  NUMBER(4) primary key NOT NULL,
+     level_name nvarchar2(50) NOT NULL,
+     description nvarchar2(200),
+     is_delete INTEGER NOT NULL
+);
+INSERT INTO "LEVEL_RANK" (id,level_name,description,is_delete) VALUEs(1,'fresher','nhân viên thử việc',0);
+INSERT INTO "LEVEL_RANK" (id,level_name,description,is_delete) VALUEs(2,'junior','nhân viên nhỏ tuổi, ít kinh nghiệm',0);
+INSERT INTO "LEVEL_RANK" (id,level_name,description,is_delete) VALUEs(3,'intern','nhân viên thực tập',0);
+INSERT INTO "LEVEL_RANK" (id,level_name,description,is_delete) VALUEs(4,'senior','nhân viên có kinh nghiệm',0);
+
+---- status job---
+Create table job_status(
+    id NUMBER(4) primary key,
+    status_name nvarchar2(50),
+    description nvarchar2(200),
+   is_delete INTEGER NOT NULL
+);
+INSERT INTO job_status(id , status_name , description , is_delete) VALUES(1,'J_PENDING','Tin tuyển dụng trạng thái đang chờ duyệt',0);
+INSERT INTO job_status(id , status_name , description , is_delete) VALUES(2,'J_APPROVED','Tin tuyển dụng trạng thái  đã được duyệt',0);
+INSERT INTO job_status(id , status_name , description , is_delete) VALUES(3,'J_REJECTED','Tin tuyển dụng trạng thái  đã bị từ chối duyệt',0);
+INSERT INTO job_status(id , status_name , description , is_delete) VALUES(4,'J_NOT_PUBLISHED','Tin tuyển dụng trạng thái chưa đăng tuyển',0);
+INSERT INTO job_status(id , status_name , description , is_delete) VALUES(5,'J_RECRUITING','Tin tuyển dụng trạng thái đang đăng tuyển',0);
+INSERT INTO job_status(id , status_name , description , is_delete) VALUES(6,'J_STOP','Tin tuyển dụng trạng thái tạm dừng tuyển',0);
+INSERT INTO job_status(id , status_name , description , is_delete) VALUES(7,'J_COLSED','Tin tuyển dụng trạng thái đã đóng, không tuyển nữa',0);
+
+
+----academic level (trình độ học vấn)----
+Create table academic_level(
+    id NUMBER(4) primary key,
+    academic_name nvarchar2(50), --- trình độ học vấn---
+    description nvarchar2(200),
+   is_delete INTEGER NOT NULL
+);
+insert into academic_level VALUES(1,'high_school','tốt nghiệp cấp 3',0);
+insert into academic_level VALUES(2,'college','tốt nghiệp cao đẳng',0);
+insert into academic_level VALUES(3,'university','tốt nghiệp đại học',0);
+insert into academic_level VALUES(4,'master','thạc sĩ',0);
+insert into academic_level VALUES(5,'phd','tiến sĩ',0);
+
+---- status file---
+Create table profile_status(
+    id NUMBER(4) NOT NULL primary key,
+    name nvarchar2(50),
+    description nvarchar2(200),
+    is_delete INTEGER NOT NULL
+);
+insert into profile_status VALUES(1,'P_WAITING','Hồ sơ ứng tuyển chờ duyệt',0);
+insert into profile_status VALUES(2,'P_REJECT','Hồ sơ ứng tuyển đã bị từ chối',0);
+insert into profile_status VALUES(3,'P_APPROVED','Hồ sơ ứng tuyển đã được duyệt',0);
+insert into profile_status VALUES(4,'P_INTERVIEW','Hồ sơ ứng tuyển đã hẹn phỏng vấn',0);
+insert into profile_status VALUES(5,'P_REJECT_INTERVIEW','Hồ sơ ứng tuyển đã từ chối phỏng vấn',0);
+insert into profile_status VALUES(6,'P_LOST','Hồ sơ ứng tuyển đã phỏng vấn nhưng từ chối tuyển dụng',0);
+insert into profile_status VALUES(7,'P_SUCCESS','Hồ sơ ứng tuyển đã được tuyển dụng',0);
+
+
+CREATE TABLE roles(
+    id NUMBER(4) NOT NULL,
+    role_code VARCHAR(20) NOT NULL UNIQUE,
+    name VARCHAR(20) NOT NULL,
+    description VARCHAR(200) NOT NULL,
+    PRIMARY KEY(id)
+);
+insert into roles VALUES(1,'ROLE_JE','Job register ', 'Quyển quản lý job của người đăng tin tuyển dụng');
+insert into roles VALUES(2,'ROLE_ADMIN','admin ', 'Quyển quản lý hệ thống');
+insert into roles VALUES(3,'ROLE_USER','user ', 'Quyển cho người dùng ứng tuyển job');
+
+
+CREATE TABLE method_work(
+    id NUMBER NOT NULL,
+    method_name  VARCHAR(50) NOT NULL,
+    description  VARCHAR(100) NOT NULL,
+    is_delete INTEGER NOT NULL,
+    PRIMARY KEY(id )
+);
+insert into method_work VALUES(1, 'FULLTIME','Làm việc toàn thời gian  ', 0);
+insert into method_work VALUES(2, 'PARTIME','Làm việc bán thời gian  ', 0);
+
+
+CREATE TABLE types(
+    id NUMBER NOT NULL,
+    name  varchar(50) NOT NULL,
+    description  varchar(100) NOT NULL,
+    is_delete INTEGER NOT NULL, 
+    PRIMARY KEY(id )   
+);
+insert into types VALUES(1, 'NEW_PROFILE','Loại thông báo khi có ứng viên mới ứng tuyển vào một job  ', 0);
+insert into types VALUES(2, 'REJECTED','Loại thông báo khi có ứng viên mới từ chối ứng tuyển vào một job ', 0);
+insert into types VALUES(3, 'NEW_JOB','Loại thông báo khi tạo mới một job ', 0);
+
+
+CREATE TABLE job_position(
+    id NUMBER NOT NULL,
+    name  varchar(50) NOT NULL,
+    description  varchar(100) NOT NULL,
+    is_delete INTEGER NOT NULL, 
+    PRIMARY KEY(id )   
+);
+insert into job_position VALUES(1, 'INTERN','nhân viên thực tập', 0);
+insert into job_position VALUES(2, 'FRESHER','nhân viên thử việc  ', 0);
+insert into job_position VALUES(3, 'JUNIOR','Nhân viên hết thử việc, có ít kinh nghiệm', 0);
+insert into job_position VALUES(4, 'SENIOR','Nhân viên có nhiều kinh nghiệm', 0);
+
+
+CREATE TABLE notifications(
+    id NUMBER NOT NULL,
+    sender_id  NUMBER NOT NULL,
+    receiver_id  NUMBER NOT NULL,
+    create_date DATE NOT NULL, 
+    content  varchar(200) NOT NULL,
+    res_id NUMBER NOT NULL, -- là job_id hoặc là job_reg_id;
+    type_id NUMBER NOT NULL,
+    is_delete INTEGER NOT NULL, 
+    PRIMARY KEY(id )   ,
+    CONSTRAINT fk_type FOREIGN KEY (type_id)  REFERENCES types (id)
+);
+
+
+
+CREATE TABLE users(
+    id NUMBER(4) NOT NULL  PRIMARY KEY,
+    full_name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE ,
+    user_name VARCHAR(20) NOT NULL UNIQUE,
+    password VARCHAR(20) NOT NULL,    
+    phone_number VARCHAR(20) NOT NULL UNIQUE,
+    home_town VARCHAR(100) ,
+    gender VARCHAR(100) ,
+    birth_day DATE NOT NULL ,
+    is_active INTEGER , 
+    is_delete INTEGER NOT NULL
+);
+insert into users(id,full_name,email,user_name , password ,phone_number ,home_town ,gender ,birth_day ,is_active ,is_delete ) VALUES(1,'Hoang Ngoc Giap','hoanggiap6984@gmail.com', 'giaphn','123456789','0988848888','Hà Nội','Nam',TO_DATE('2021/12/10','yyyy/MM/dd'),1,0);
+insert into users(id,full_name,email,user_name , password ,phone_number ,home_town ,gender ,birth_day ,is_active ,is_delete ) VALUES(2,'Pham Tuan Kiet','tuankiet@gmail.com', 'kietpt','123456789','0988849888','Hà Nội','Nam',TO_DATE('2021/12/10','yyyy/MM/dd'),1,0);
+insert into users(id,full_name,email,user_name , password ,phone_number ,home_town ,gender ,birth_day ,is_active ,is_delete ) VALUES(3,'Nguyen Duc Trung','trungnd@gmail.com', 'trungnd','123456789','0988849898','Hà Nội','Nam',TO_DATE('2021/12/10','yyyy/MM/dd'),1,0);
+insert into users(id,full_name,email,user_name , password ,phone_number ,home_town ,gender ,birth_day ,is_active ,is_delete ) VALUES(4,'Dat','dat@gmail.com', 'dat','123456789','0988849844','Hà Nội','Nam',TO_DATE('2021/12/10','yyyy/MM/dd'),1,0);
+
+
+----file (hồ sơ)----
+Create table profiles(
+    id NUMBER(4) NOT NULL  PRIMARY KEY,
+    user_id  NUMBER(4)  NOT NULL,
+    skill nvarchar2(50),
+    number_years_experience NUMBER(4),  ---số năm kinh nghiệm ---
+    academic_level_id NUMBER(4) NOT NULL, -- Trình độ học vấn cao đẳng, đại học
+    desired_salary nvarchar2(50), --mức lương mong muốn ---
+    desired_working_address nvarchar2(50), --địa chỉ làm việc mong muốn ---    
+    is_delete INTEGER NOT NULL,
+    CONSTRAINT fk_user  FOREIGN KEY (user_id) REFERENCES users (id),
+    CONSTRAINT fk_academic_level_p FOREIGN KEY (academic_level_id)  REFERENCES academic_level (id)
+);
+INSERT INTO profiles VALUES(1,1,'#Java',0,3,30000000,'Ha Noi',0);
+INSERT INTO profiles VALUES(2,2,'#Java',0,3,30000000,'Ha Noi',0);
+INSERT INTO profiles VALUES(3,3,'#Java',0,3,30000000,'Ha Noi',0);
+INSERT INTO profiles VALUES(4,4,'#Java',0,3,30000000,'Ha Noi',0);
+
+CREATE TABLE OTP(
+    id NUMBER NOT NULL,
+    code  NUMBER NOT NULL,
+    issueAt NUMBER NOT NULL,
+    create_date DATE NOT NULL, 
+    user_id NUMBER NOT NULL,
+    PRIMARY KEY(id ),
+    CONSTRAINT fk_users FOREIGN KEY (user_id)  REFERENCES users (id) 
+);
+
+
+CREATE TABLE jobs(
+    id NUMBER PRIMARY KEY NOT NULL,
+    job_name VARCHAR(100) NOT NULL,
+    job_position_id  NUMBER(8,2) NOT NULL,
+    number_experience VARCHAR(100) NOT NULL,
+    method_work_id  NUMBER NOT NULL,
+    address_work VARCHAR(100) NOT NULL,
+    academic_level_id NUMBER(4) NOT NULL,
+    level_id NUMBER(4) NOT NULL,
+    qty_person INTEGER NOT NULL,
+    create_date DATE NOT NULL,
+    due_date DATE NOT NULL,
+    skills VARCHAR(100) NOT NULL,
+    description VARCHAR(100) NOT NULL,
+    interrest VARCHAR(100) NOT NULL,
+    salary NUMBER NOT NULL,
+    contact_id NUMBER(4,2) NOT NULL,
+    job_status_id NUMBER(4,2) NOT NULL,
+    views  NUMBER(8,2) ,
+    create_id  NUMBER(4,2) NOT NULL,  
+    is_delete INTEGER NOT NULL,
+    CONSTRAINT fk_method_work_job FOREIGN KEY (method_work_id)  REFERENCES method_work (id),
+    CONSTRAINT fk_academic_level_job FOREIGN KEY (academic_level_id)  REFERENCES academic_level (id),
+    CONSTRAINT fk_level_job FOREIGN KEY (level_id)  REFERENCES level_rank (id),
+    CONSTRAINT fk_contact_job FOREIGN KEY (contact_id)  REFERENCES users (id),
+    CONSTRAINT fk_job_status_job FOREIGN KEY (job_status_id)  REFERENCES job_status (id),
+    CONSTRAINT fk_create_job FOREIGN KEY (create_id)  REFERENCES users (id),
+    CONSTRAINT fk_job_position FOREIGN KEY (job_position_id)  REFERENCES job_position(id)
+);
+insert into jobs(id,job_name,job_position_id,number_experience,method_work_id,address_work,academic_level_id,level_id,qty_person,create_date,due_date,skills,description,interrest,salary,contact_id,job_status_id,views,create_id,is_delete)
+            VALUES(1, 'Tuyển dụng lập trình viên java', 1,0,2,'Duy Tân',3,1,3,TO_DATE('2021/11/14','yyyy/MM/dd'),TO_DATE('2021/12/14','yyyy/MM/dd'),'#java','nhân viên thực tập ngôn ngữ java','trợ cấp thực tập',8000000,1,1,0,1,0);
+insert into jobs VALUES(2, 'Tuyển dụng lập trình viên c#', 1,0,2,'Duy Tân',3,1,3,TO_DATE('2021/12/4','yyyy/MM/dd'),TO_DATE('2021/12/19','yyyy/MM/dd'),'#cshap','nhân viên thực tập ngôn ngữ C#','trợ cấp thực tập',8000000,1,1,0,1,0);
+insert into jobs VALUES(3, 'Tuyển dụng lập trình viên PHP', 1,0,2,'Duy Tân',3,1,3,TO_DATE('2021/12/1','yyyy/MM/dd'),TO_DATE('2021/12/14','yyyy/MM/dd'),'#cshap','nhân viên thực tập ngôn ngữ PHP','trợ cấp thực tập',8000000,1,1,0,1,0);
+insert into jobs VALUES(4, 'Tuyển dụng lập trình viên Mobile', 1,0,2,'Duy Tân',3,1,3,TO_DATE('2021/12/10','yyyy/MM/dd'),TO_DATE('2021/12/20','yyyy/MM/dd'),'#android','nhân viên thực tập lập trình mobile android','trợ cấp thực tập',8000000,1,1,0,1,0);
+
+
+---- Dang ky job cho tung users----
+CREATE TABLE jobs_register(
+    id NUMBER NOT NULL,
+    job_id NUMBER NOT NULL,
+    user_id NUMBER NOT NULL,
+    date_register DATE NOT NULL ,
+    PROFILE_STATUS_ID INTEGER NOT NULL, 
+    date_interview DATE NOT NULL,
+    method_interview VARCHAR(50) NOT NULL,
+    cv_file VARCHAR(50) ,
+    is_delete INTEGER NOT NULL,
+    PRIMARY KEY(id ),
+    
+    CONSTRAINT fk_job_register  FOREIGN KEY (job_id)   REFERENCES jobs (id),
+    CONSTRAINT fk_user_register   FOREIGN KEY (user_id)    REFERENCES users (id),
+    CONSTRAINT fk_reg_status FOREIGN KEY (PROFILE_STATUS_ID)  REFERENCES profile_status (id)
+);
+INSERT INTO jobs_register VALUES(1,1,1,TO_DATE('2021/12/10','yyyy/MM/dd'),7,TO_DATE('2021/12/14','yyyy/MM/dd'),'ONLINE','cv_file',0);
+INSERT INTO jobs_register VALUES(2,2,2,TO_DATE('2021/12/10','yyyy/MM/dd'),3,TO_DATE('2021/12/14','yyyy/MM/dd'),'ONLINE','cv_file',0);
+INSERT INTO jobs_register VALUES(3,3,3,TO_DATE('2021/12/10','yyyy/MM/dd'),1,TO_DATE('2021/12/14','yyyy/MM/dd'),'ONLINE','cv_file',0);
+INSERT INTO jobs_register VALUES(4,4,4,TO_DATE('2021/12/10','yyyy/MM/dd'),7,TO_DATE('2021/12/14','yyyy/MM/dd'),'ONLINE','cv_file',0);
+
+
+CREATE TABLE company(
+    id NUMBER NOT NULL,
+    name  VARCHAR(200) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    hot_line VARCHAR(100) NOT NULL,
+    date_incoporation DATE NOT NULL, -- ngày thành lập công ty
+    tax_code VARCHAR(100) NOT NULL,
+    tax_date DATE NOT NULL,-- Ngày cấp mã số thuế
+    tax_place VARCHAR(50) NOT NULL, -- Nơi cấp mã số thuế
+    head_office VARCHAR(50) NOT NULL, -- trụ sở chính
+    number_staff INTEGER NOT NULL, -- số lượng nhân viên
+    link_web VARCHAR(50) NOT NULL, -- trụ sở chính
+    description VARCHAR(200) NOT NULL, -- mô tả công ty
+    avatar VARCHAR(50) NOT NULL, -- ảnh đại diện
+    backdrop_img VARCHAR(50) NOT NULL, -- ảnh bìa
+    is_delete INTEGER NOT NULL,
+    PRIMARY KEY(id )
+);
